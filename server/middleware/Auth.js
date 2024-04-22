@@ -5,9 +5,13 @@ import User from "../Models/UserModel.js";
 // @desc    Auth user & get token
 // @route   POST /api/users/login
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
-  });
+  try {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // protect router function
