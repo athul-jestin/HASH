@@ -89,7 +89,7 @@ function Profile() {
         <div className="w-full">
           <Input
             label="Email"
-            placeholder="netflixo@gmail.com"
+            placeholder="hash@gmail.com"
             type="email"
             bg={true}
             name="email"

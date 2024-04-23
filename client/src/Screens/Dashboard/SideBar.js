@@ -34,12 +34,12 @@ function SideBar({ children }) {
           icon: BsFillGridFill,
         },
         {
-          name: "Movies List",
+          name: "video List",
           link: "/movieslist",
           icon: FaListAlt,
         },
         {
-          name: "Add Movie",
+          name: "Add Video",
           link: "/addmovie",
           icon: RiMovie2Fill,
         },
@@ -59,7 +59,7 @@ function SideBar({ children }) {
           icon: FiSettings,
         },
         {
-          name: "Favorites Movies",
+          name: "Favorites Videos",
           link: "/favorites",
           icon: FaHeart,
         },

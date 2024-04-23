@@ -11,14 +11,13 @@ function AboutUs() {
           <div className="grid grid-flow-row xl:grid-cols-2 gap-4 xl:gap-16 items-center">
             <div>
               <h3 className="text-xl lg:text-3xl mb-4 font-semibold">
-                Welcome to our Netflixo
+                Welcome to our HASH
               </h3>
               <div className="mt-3 text-sm leading-8 text-text">
                 <p>
-                  At Netflixo, we want to entertain the world. Whatever your
+                  At HASH, we want to entertain the world. Whatever your
                   taste, and no matter where you live, we give you access to
-                  best-in-class TV series, documentaries, feature films and
-                  mobile games. Our members control what they want to watch,
+                  videos . Our members control what they want to watch,
                   when they want it, with no ads, in one simple subscription.
                   We’re streaming in more than 30 languages and 190 countries,
                   because great stories can come from anywhere and be loved
@@ -27,7 +26,7 @@ function AboutUs() {
                   story.
                 </p>
                 <p>
-                  At Netflixo, we have an amazing and unique employee culture.
+                  At HASH, we have an amazing and unique employee culture.
                   Find out first-hand what it’s really like to work here, and to
                   learn more about our company values.
                 </p>
