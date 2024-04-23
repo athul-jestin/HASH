@@ -30,7 +30,7 @@ function NavBar() {
           <div className="col-span-1 lg:block hidden">
             <Link to="/">
               <img
-                src="/images/logo.png"
+                src="/images/logo.png" 
                 alt="logo"
                 className="w-full h-12 object-contain"
               />
@@ -52,7 +52,7 @@ function NavBar() {
                 type="search"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search Movie Name from here"
+                placeholder="Search"
                 className="font-medium placeholder:text-border text-sm w-11/12 h-12 bg-transparent border-none px-2 text-black"
               />
             </form>
@@ -60,7 +60,7 @@ function NavBar() {
           {/* menus */}
           <div className="col-span-3 font-medium text-sm hidden xl:gap-14 2xl:gap-20 justify-between lg:flex xl:justify-end items-center">
             <NavLink to="/movies" className={Hover}>
-              Movies
+              Videos
             </NavLink>
             <NavLink to="/about-us" className={Hover}>
               About Us

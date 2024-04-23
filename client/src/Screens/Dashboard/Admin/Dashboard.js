@@ -53,7 +53,7 @@ function Dashboard() {
     {
       bg: "bg-orange-600",
       icon: FaRegListAlt,
-      title: "Total Movies",
+      title: "Total Videos",
       total: isLoading ? "Loading.." : totalMovies || 0,
     },
     {
@@ -91,7 +91,7 @@ function Dashboard() {
           </div>
         ))}
       </div>
-      <h3 className="text-md font-medium my-6 text-border">Recent Movies</h3>
+      <h3 className="text-md font-medium my-6 text-border">Recent Videos</h3>
       {isLoading ? (
         <Loader />
       ) : movies?.length > 0 ? (

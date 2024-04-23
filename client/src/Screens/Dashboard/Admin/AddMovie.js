@@ -103,8 +103,8 @@ function AddMovie() {
         <div className="w-full grid md:grid-cols-2 gap-6">
           <div className="w-full">
             <Input
-              label="Movie Title"
-              placeholder="Game of Thrones"
+              label="Video Title"
+              placeholder=""
               type="text"
               bg={true}
               name="name"
@@ -115,7 +115,7 @@ function AddMovie() {
           <div className="w-full">
             <Input
               label="Hours"
-              placeholder="2"
+              placeholder=""
               type="number"
               bg={true}
               name="time"
@@ -129,7 +129,7 @@ function AddMovie() {
           <div className="w-full">
             <Input
               label="Language Used"
-              placeholder="English"
+              placeholder=""
               type="text"
               bg={true}
               name="language"
@@ -142,7 +142,7 @@ function AddMovie() {
           <div className="w-full">
             <Input
               label="Year of Release"
-              placeholder="2022"
+              placeholder=""
               type="number"
               bg={true}
               name="year"
@@ -177,7 +177,7 @@ function AddMovie() {
         {/* DESCRIPTION */}
         <div className="w-full">
           <Message
-            label="Movie Description"
+            label="Video   Description"
             placeholder="Make it short and sweet"
             name="desc"
             register={{ ...register("desc") }}
@@ -187,7 +187,7 @@ function AddMovie() {
         {/* CATEGORY */}
         <div className="text-sm w-full">
           <Select
-            label="Movie Category"
+            label="Video Category"
             options={categories?.length > 0 ? categories : []}
             name="category"
             register={{ ...register("category") }}
@@ -198,7 +198,7 @@ function AddMovie() {
 
         <div className="flex flex-col gap-2 w-full ">
           <label className="text-border font-semibold text-sm">
-            Movie Video
+            Video
           </label>
           <div className={`w-full grid ${videoUrl && "md:grid-cols-2"} gap-6`}>
             {videoUrl && (
@@ -225,7 +225,7 @@ function AddMovie() {
                   className="p-2 italic text-xs text-text rounded flex-colo bg-main border border-border"
                 >
                   <img
-                    src={`${user.image ? user.image : "/images/user.png"}`}
+                    src={`${user.image ? user.image : ""}`}
                     alt={user.name}
                     className="w-full h-24 object-cover rounded mb-2"
                   />
@@ -261,7 +261,7 @@ function AddMovie() {
             "Please Wait..."
           ) : (
             <>
-              <ImUpload /> Publish Movie
+              <ImUpload /> Publish Video
             </>
           )}
         </button>

@@ -231,7 +231,7 @@ function EditMovie() {
 
           <div className="flex flex-col gap-2 w-full ">
             <label className="text-border font-semibold text-sm">
-              Movie Video
+               Video
             </label>
             <div
               className={`w-full grid ${videoUrl && "md:grid-cols-2"} gap-6`}
@@ -302,7 +302,7 @@ function EditMovie() {
               "Please Wait..."
             ) : (
               <>
-                <ImUpload /> Update Movie
+                <ImUpload /> Update Video
               </>
             )}
           </button>
