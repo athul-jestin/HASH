@@ -13,6 +13,7 @@ const createCategoryService = async (title, token) => {
       Authorization: `Bearer ${token}`,
     },
   });
+  console.log("Category Created: ", data)
   return data;
 };
 
