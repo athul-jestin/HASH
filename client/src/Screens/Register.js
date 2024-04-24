@@ -59,7 +59,7 @@ function Login() {
           <div className="w-full">
             <Input
               label="FullName"
-              placeholder="Netflixo React Tailwind"
+              placeholder=""
               type="text"
               bg={true}
               name="fullName"
@@ -72,7 +72,7 @@ function Login() {
           <div className="w-full">
             <Input
               label="Email"
-              placeholder="netflixo@gmail.com"
+              placeholder=""
               type="email"
               bg={true}
               name="email"
