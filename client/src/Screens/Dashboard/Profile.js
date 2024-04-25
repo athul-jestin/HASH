@@ -78,7 +78,7 @@ function Profile() {
         <div className="w-full">
           <Input
             label="Full Name"
-            placeholder="Netflixo React Tailwind"
+            placeholder="Hash React Tailwind"
             type="text"
             bg={true}
             name="fullName"

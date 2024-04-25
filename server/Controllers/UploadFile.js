@@ -34,7 +34,6 @@ Uploadrouter.post("/", upload.single("file"), async (req, res) => {
       // if success
       blobStream.on("finish", () => {
         //  return url
-        // const url = `https://firebasestorage.googleapis.com/v0/b/netflixo-minah.appspot.com/o/${filename}?alt=media`;
         const url = `https://firebasestorage.googleapis.com/v0/b/hash-c9458.appspot.com/o/${filename}?alt=media`;
         res.status(200).json(url);
       });
