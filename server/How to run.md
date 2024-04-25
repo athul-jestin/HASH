@@ -1,4 +1,4 @@
-<!-- This are infomation how to run Netflixo Server -->
+<!-- This are infomation how to run Hash Server -->
 
 1. create .env file in server folder
 

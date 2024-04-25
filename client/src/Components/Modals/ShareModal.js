@@ -57,7 +57,7 @@ function ShareMovieModal({ modalOpen, setModalOpen, movie }) {
             <data.shareButton
               key={index}
               url={url}
-              quote="Netflixo | Free Movies Site"
+              quote="Hash | Free Movies Site"
             >
               <div className="w-12 transitions hover:bg-subMain flex-colo text-lg h-12 bg-white rounded bg-opacity-30">
                 <data.icon />
