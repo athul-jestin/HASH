@@ -19,7 +19,11 @@ function Footer() {
           link: '/contact-us',
         },
         {
-          name: 'Movies',
+          name: 'Videos',
+          link: '/movies',
+        },
+        {
+          name: 'Education',
           link: '/movies',
         },
       ],
@@ -54,7 +58,7 @@ function Footer() {
         },
         {
           name: 'My Favorites',
-          link: '/favorite',
+          link: '/favorites',
         },
         {
           name: 'Profile',
@@ -104,12 +108,12 @@ function Footer() {
             </Link>
             <p className="leading-7 text-sm text-border mt-3">
               <span>
-                Lorem 196 Andrew Road, Suite 200, <br /> New York, NY 10007
+                Jyothi Engineering College, Cheruthuruthy, <br /> Thrissur, Kerala
               </span>
               <br />
-              <span>Tell: +255 754 661 423</span>
+              <span>Tell: +91 9809778856</span>
               <br />
-              <span>Email: info@zpunet.com</span>
+              <span>Email: info@hash.com</span>
             </p>
           </div>
         </div>
