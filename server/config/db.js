@@ -1,4 +1,4 @@
-// connect MongoDB with mongoose and dotenv package
+// connect MongoDB with mongoose and dotenv packages
 import mongoose from "mongoose";
 
 export const connectDB = async () => {
