@@ -31,22 +31,7 @@ function AboutUs() {
                   learn more about our company values.
                 </p>
               </div>
-              <div className="grid md:grid-cols-2 gap-6 mt-8">
-                <div className="p-8 bg-dry rounded-lg">
-                  <span className="text-3xl block font-extrabold">10K</span>
-                  <h4 className="text-lg font-semibold my-2">Listed Movies</h4>
-                  <p className="mb-0 text-text leading-7 text-sm">
-                    Stories move us. They make us feel more emotion
-                  </p>
-                </div>
-                <div className="p-8 bg-dry rounded-lg">
-                  <span className="text-3xl block font-extrabold">8K</span>
-                  <h4 className="text-lg font-semibold my-2">Lovely Users</h4>
-                  <p className="mb-0 text-text leading-7 text-sm">
-                    See new perspectives, and bring us closer to each other
-                  </p>
-                </div>
-              </div>
+              
             </div>
             <img
               src="/images/about2.jpg"
