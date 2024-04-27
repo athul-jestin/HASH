@@ -59,7 +59,7 @@ function Login() {
           <div className="w-full">
             <Input
               label="FullName"
-              placeholder=""
+              placeholder="Hash"
               type="text"
               bg={true}
               name="fullName"
@@ -72,7 +72,7 @@ function Login() {
           <div className="w-full">
             <Input
               label="Email"
-              placeholder=""
+              placeholder="hash@gmail.com"
               type="email"
               bg={true}
               name="email"

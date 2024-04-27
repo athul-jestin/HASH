@@ -22,10 +22,6 @@ function Footer() {
           name: 'Videos',
           link: '/movies',
         },
-        {
-          name: 'Education',
-          link: '/movies',
-        },
       ],
     },
     {
@@ -44,7 +40,7 @@ function Footer() {
           link: '#',
         },
         {
-          name: 'Historical',
+          name: 'Educational',
           link: '#',
         },
       ],

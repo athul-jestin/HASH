@@ -106,7 +106,7 @@ export const deleteMovieAction = (id) => async (dispatch, getState) => {
       type: MoviesConstant.DELETE_MOVIE_SUCCESS,
       payload: response,
     });
-    toast.success(`Movie deleted successfully`);
+    toast.success(`Video deleted successfully`);
     dispatch(getAllMoviesAction({}));
   } catch (error) {
     ErrorsAction(error, dispatch, MoviesConstant.DELETE_MOVIE_FAIL);

@@ -27,7 +27,7 @@ function Users() {
   };
 
   useEffect(() => {
-    // get all liked movies
+    // get all liked videos
     dispatch(getAllUsersAction());
     if (isError || deleteError) {
       toast.error(isError || deleteError);
@@ -50,7 +50,7 @@ function Users() {
             onDeleteFunction={adminDeleteUserHandler}
           />
         ) : (
-          <Empty message="You have no favorites movies" />
+          <Empty message="You have no favorites video" />
         )}
       </div>
     </SideBar>
