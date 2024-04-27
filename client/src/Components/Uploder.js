@@ -40,14 +40,14 @@ function Uploder({ setImageUrl }) {
               <FiUploadCloud />
             </span>
 
-            <p className="text-sm mt-2">Drag your image here</p>
+            <p className="text-sm mt-2">Drag and drop</p>
 
             <em className="text-xs text-border">
               {isDragActive
                 ? "Drop it like it's hot!"
                 : isDragReject
                 ? "Unsupported file type..."
-                : "Only *.jpeg and *.png images will be accepted"}
+                : ""}
             </em>
           </div>
         )}

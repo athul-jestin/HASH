@@ -134,8 +134,8 @@ function EditMovie() {
           <div className="w-full grid md:grid-cols-2 gap-6">
             <div className="w-full">
               <Input
-                label="Movie Title"
-                placeholder="Game of Thrones"
+                label="Video Title"
+                placeholder=""
                 type="text"
                 bg={true}
                 name="name"
@@ -208,7 +208,7 @@ function EditMovie() {
           {/* DESCRIPTION */}
           <div className="w-full">
             <Message
-              label="Movie Description"
+              label="Video Description"
               placeholder="Make it short and sweet"
               name="desc"
               register={{ ...register("desc") }}
@@ -218,7 +218,7 @@ function EditMovie() {
           {/* CATEGORY */}
           <div className="text-sm w-full">
             <Select
-              label="Movie Category"
+              label="Video Category"
               options={categories?.length > 0 ? categories : []}
               name="category"
               register={{ ...register("category") }}
