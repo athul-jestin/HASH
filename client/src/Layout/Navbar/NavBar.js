@@ -58,7 +58,7 @@ function NavBar() {
             </form>
           </div>
           {/* menus */}
-          <div className="col-span-3 font-medium text-sm hidden xl:gap-14 2xl:gap-20 justify-between lg:flex xl:justify-end items-center">
+          <div className="col-span-3 font-medium text-sm hidden xl:gap-14 2xl:gap-14 justify-between lg:flex xl:justify-end items-center">
             <NavLink to="/movies" className={Hover}>
               Videos
             </NavLink>
@@ -67,6 +67,9 @@ function NavBar() {
             </NavLink>
             <NavLink to="/contact-us" className={Hover}>
               Contact Us
+            </NavLink>
+            <NavLink to="/chatbot" className={Hover}>
+              Chatbot
             </NavLink>
             <NavLink
               to={

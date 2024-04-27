@@ -7,6 +7,7 @@ import { errorHandler } from "./middleware/errorMiddleware.js";
 import userRoutes from "./Routers/UserRoute.js";
 import moviesRoutes from "./Routers/MoviesRoutes.js";
 import categoriesRoutes from "./Routers/CategoriesRoute.js";
+import ChatbotRoutes from "./Routers/ChatbotRoutes.js";
 import Uploadrouter from "./Controllers/UploadFile.js";
 
 dotenv.config();
@@ -25,6 +26,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/movies", moviesRoutes);
 app.use("/api/categories", categoriesRoutes);
 app.use("/api/upload", Uploadrouter);
+app.use("/api/chatbot",ChatbotRoutes)
 
 // error handling middleware
 app.use(errorHandler);
