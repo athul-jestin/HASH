@@ -83,7 +83,7 @@ function WatchPage() {
 
         {/* watch video */}
         {play ? (
-          <video controls autoPlay={play} className="w-full h-full rounded">
+          <video controls autoPlay={play} className="w-full h-[80vh] rounded">
             <source src={movie?.video} type="video/mp4" title={movie?.name} />
           </video>
         ) : (
