@@ -19,6 +19,7 @@ import Login from './Screens/Login';
 import MoviesPage from './Screens/Movies';
 import NotFound from './Screens/NotFound';
 import Register from './Screens/Register';
+import Chatbot from './Screens/Chatbot';
 import SingleMovie from './Screens/SingleMovie';
 import WatchPage from './Screens/WatchPage';
 import DrawerContext from './Context/DrawerContext';
@@ -71,6 +72,7 @@ function App() {
             <Route path="/watch/:id" element={<WatchPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/chatbot" element={<Chatbot />} />
             <Route path="*" element={<NotFound />} />
 
             {/* ***** PRIVATE PUBLIC ROUTES ****** */}
