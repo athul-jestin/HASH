@@ -11,7 +11,7 @@ const ReviewValidation = yup.object().shape({
 const MovieValidation = yup.object().shape({
   name: yup
     .string()
-    .required("Please enter a video name")
+    .required("Please enter a video tagline")
     .max(50, "Video name should be less than 50 characters"),
   time: yup.number("Number required").required("Please enter video duration"),
   language: yup.string().required("Please enter video language"),
