@@ -1,4 +1,4 @@
-<!-- This are infomation how to run Hash Server -->
+<!-- How to run Hash-Server -->
 
 1. create .env file in server folder
 
@@ -14,8 +14,7 @@
   > CLIENT_ID ='your client id'
   > CLIENT_X509_CERT_URL 'your project cert url'
   > STORAGE_BUCKET ='your firebase backet name'
+  >JWT_SECRET='your openAI secret key'
 
 2. run "npm install --legacy-peer-deps"
 3. run "npm run dev"
-
-<!-- ****** any error contact us error@zpunet.com or frontendkonki@gmail.com -->
