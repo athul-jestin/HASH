@@ -39,7 +39,7 @@ function Chatbot() {
 
   return (
     <Layout>
-      <div className="flex items-center justify-between px-4 py-5 bg-dry border border-gray-800">
+      <div className="flex items-center justify-between px-10 py-5 bg-dry border border-gray-800">
         <img
           src="/images/chatbot_title_icon.png"
           className="h-8"
