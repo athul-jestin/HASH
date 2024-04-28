@@ -5,7 +5,6 @@ import { IoClose } from "react-icons/io5";
 import { BsCollectionPlay } from "react-icons/bs";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import { BiPhoneCall } from "react-icons/bi";
-//import { FaFacebook, FaMedium, FaTelegram, FaYoutube } from "react-icons/fa";
 
 function MenuDrawer({ drawerOpen, toggleDrawer }) {
   const active = "bg-dry text-subMain";
@@ -31,26 +30,14 @@ function MenuDrawer({ drawerOpen, toggleDrawer }) {
       link: "/contact-us",
       icon: BiPhoneCall,
     },
+    {
+      name: "Chatbot",
+      link: "/chatbot",
+      icon: "/images/chatbot_title_icon(white).png",
+    },
   ];
 
-  const LinkDatas = [
-    /*{
-      icon: FaFacebook,
-      link: "https://www.facebook.com/zpunet",
-    },
-    {
-      icon: FaMedium,
-      link: "https://medium.com/@irenemmassyy",
-    },
-    {
-      icon: FaTelegram,
-      link: "https://t.me/zpunet",
-    },
-    {
-      icon: FaYoutube,
-      link: "https://www.youtube.com/channel/UCOYwYO-LEsrjqBs6xXSfq1w",
-    },*/
-  ];
+  const LinkDatas = [];
 
   return (
     <MainDrawer drawerOpen={drawerOpen} closeDrawer={toggleDrawer}>
@@ -83,7 +70,7 @@ function MenuDrawer({ drawerOpen, toggleDrawer }) {
                 onClick={toggleDrawer}
                 className={Hover}
               >
-                <link.icon className="text-lg" /> {link.name}
+                <img src={link.icon} alt={link.name} className="w-6 h-6 mr-2" /> {link.name} {/* Changed to render icon as <img> element */}
               </NavLink>
             ))}
           </div>
