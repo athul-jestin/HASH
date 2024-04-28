@@ -66,7 +66,7 @@ function NavBar() {
               About Us
             </NavLink>
             <NavLink to="/contact-us" className={Hover}>
-              Contact Us
+              Notes
             </NavLink>
             <NavLink to="/chatbot" className={Hover}>
               Chatbot

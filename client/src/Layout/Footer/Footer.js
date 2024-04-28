@@ -15,12 +15,16 @@ function Footer() {
           link: '/about-us',
         },
         {
-          name: 'Contact Us',
-          link: '/contact-us',
+          name: 'Notes',
+          link: '#',
         },
         {
           name: 'Videos',
           link: '/movies',
+        },
+        {
+          name: 'Chatbot',
+          link: '/chatbot',
         },
       ],
     },
@@ -40,7 +44,7 @@ function Footer() {
           link: '#',
         },
         {
-          name: 'Educational',
+          name: 'Health',
           link: '#',
         },
       ],
