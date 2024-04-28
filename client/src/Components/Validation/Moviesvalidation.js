@@ -11,16 +11,16 @@ const ReviewValidation = yup.object().shape({
 const MovieValidation = yup.object().shape({
   name: yup
     .string()
-    .required("Please enter a movie name")
-    .max(50, "Movie name should be less than 50 characters"),
-  time: yup.number("Number required").required("Please enter movie duration"),
-  language: yup.string().required("Please enter movie language"),
+    .required("Please enter a video name")
+    .max(50, "Video name should be less than 50 characters"),
+  time: yup.number("Number required").required("Please enter video duration"),
+  language: yup.string().required("Please enter video language"),
   year: yup
     .number("Number required")
-    .required("Please enter year of movie release"),
+    .required("Please enter year"),
   desc: yup
     .string()
-    .required("Please enter movie description")
+    .required("Please enter video description")
     .max(300, "Comment should be less than 300 characters"),
   category: yup.string().required("Please select a category"),
 });
