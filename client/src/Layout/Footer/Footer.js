@@ -28,7 +28,7 @@ function Footer() {
         },
       ],
     },
-    {
+    /*{
       title: 'Top Categories',
       links: [
         {
@@ -48,7 +48,7 @@ function Footer() {
           link: '#',
         },
       ],
-    },
+    },*/
     {
       title: 'My Account',
       links: [
