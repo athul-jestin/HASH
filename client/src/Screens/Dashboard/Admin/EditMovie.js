@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Uploder from "../../../Components/Uploder";
 import { Input, Message, Select } from "../../../Components/UsedInputs";
 import SideBar from "../SideBar";
-import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
+//import { MdDelete } from "react-icons/md";
+//import { FaEdit } from "react-icons/fa";
 import { ImUpload } from "react-icons/im";
 import CastsModal from "../../../Components/Modals/CastsModal";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,7 +14,7 @@ import ImagePreview from "../../../Components/ImagePreview";
 import { InlineError } from "../../../Components/Notfications/Error";
 import {
   getMovieByIdAction,
-  removeCast,
+  //removeCast,
   updateMovieAction,
 } from "../../../Redux/Actions/MoviesActions";
 import toast from "react-hot-toast";
@@ -68,10 +68,10 @@ function EditMovie() {
   };
 
   // delete cast handler
-  const deleteCast = (id) => {
+  /*const deleteCast = (id) => {
     dispatch(removeCast(id));
     toast.success("Cast deleted successfully");
-  };
+  };*/
 
   useEffect(() => {
     if (movie?._id !== id) {
@@ -245,54 +245,7 @@ function EditMovie() {
             </div>
           </div>
           {/* CASTS */}
-          <div className="w-full grid lg:grid-cols-2 gap-6 items-start ">
-            <div className="w-full">
-              <button
-                onClick={() => setModalOpen(true)}
-                className="w-full py-4 bg-main border border-subMain border-dashed text-white rounded"
-              >
-                Add Cast
-              </button>
-              <span className="text-border text-xs">
-                If you add new cast the previous cast will be removed so you
-                should add them again
-              </span>
-            </div>
-            <div className="grid 2xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-4 grid-cols-2 gap-4">
-              {casts?.length > 0 &&
-                casts.map((user) => (
-                  <div
-                    key={user.id}
-                    className="p-2 italic text-xs text-text rounded flex-colo bg-main border border-border"
-                  >
-                    <img
-                      src={`${user.image ? user.image : "/images/user.png"}`}
-                      alt={user.name}
-                      className="w-full h-24 object-cover rounded mb-2"
-                    />
-                    <p>{user.name}</p>
-                    <div className="flex-rows mt-2 w-full gap-2">
-                      <button
-                        type="button"
-                        onClick={() => deleteCast(user.id)}
-                        className="w-6 h-6 flex-colo bg-dry border border-border text-subMain rounded"
-                      >
-                        <MdDelete />
-                      </button>
-                      <button
-                        onClick={() => {
-                          setCast(user);
-                          setModalOpen(true);
-                        }}
-                        className="w-6 h-6 flex-colo bg-dry border border-border text-green-600 rounded"
-                      >
-                        <FaEdit />
-                      </button>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
+
           {/* SUBMIT */}
           <button
             onClick={handleSubmit(onSubmit)}
