@@ -12,24 +12,16 @@ function AboutUs() {
           <div className="grid grid-flow-row xl:grid-cols-2 gap-4 xl:gap-16 items-center">
             <div>
               <h3 className="text-xl lg:text-3xl mb-4 font-semibold">
-                Welcome to our HASH
+                Welcome to The HASH
               </h3>
               <div className="mt-3 text-sm leading-8 text-text">
                 <p>
-                  At HASH, we want to entertain the world. Whatever your
-                  taste, and no matter where you live, we give you access to
-                  videos . Our members control what they want to watch,
-                  when they want it, with no ads, in one simple subscription.
-                  We’re streaming in more than 30 languages and 190 countries,
-                  because great stories can come from anywhere and be loved
-                  everywhere. We are the world’s biggest fans of entertainment,
-                  and we’re always looking to help you find your next favorite
-                  story.
-                </p>
-                <p>
-                  At HASH, we have an amazing and unique employee culture.
-                  Find out first-hand what it’s really like to work here, and to
-                  learn more about our company values.
+                Step into the world of entertainment with us!
+                At Hash, we're all about bringing joy and excitement to your screens.
+                Our passionate team of streamers is here to make you laugh, gasp, and maybe even shed a tear or two.
+                From thrilling gaming adventures to creative endeavors and everything in between, we've got something for everyone.
+                So grab your popcorn, kick back, and join our community as we embark on a journey full of fun and surprises.
+                Welcome to the magic of streaming, welcome to HASH!
                 </p>
               </div>
             </div>
@@ -71,7 +63,7 @@ const ContactData = [
     title: "Email Us",
     info: "",
     icon: FiMail,
-    contact: "info@HAsh.com",
+    contact: "info@hash.com",
   },
   {
     id: 2,
