@@ -15,10 +15,6 @@ function Footer() {
           link: '/about-us',
         },
         {
-          name: 'Notes',
-          link: '#',
-        },
-        {
           name: 'Videos',
           link: '/movies',
         },
