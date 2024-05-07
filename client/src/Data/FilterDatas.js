@@ -20,7 +20,7 @@ export const LanguageData = [
   { title: "Norwegian" },
   { title: "Finnish" },
   { title: "Indonesian" },
-  { title: "Malay" },
+  { title: "Malayalam" },
   { title: "Thai" },
   { title: "Vietnamese" },
   { title: "Hebrew" },

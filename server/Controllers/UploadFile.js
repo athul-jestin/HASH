@@ -48,4 +48,3 @@ Uploadrouter.post("/", upload.single("file"), async (req, res) => {
 
 export default Uploadrouter;
 
-// Path: Server/Controllers/UploadFile.js
