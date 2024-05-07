@@ -76,8 +76,7 @@ function MovieRates({ movie }) {
             Review "{movie?.name}"
           </h3>
           <p className="text-sm leading-7 font-medium text-border">
-            Write a review for this movie. It will be posted on this page. lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Donec
+            Write a review for this video. It will be posted on this page.
           </p>
           <div className="text-sm w-full">
             <Select

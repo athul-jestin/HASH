@@ -163,7 +163,7 @@ export const updateMovieAction = (id, movie) => async (dispatch, getState) => {
       type: MoviesConstant.UPDATE_MOVIE_SUCCESS,
       payload: response,
     });
-    toast.success(`Movie updated successfully`);
+    toast.success(`File updated successfully`);
     dispatch(getMovieByIdAction(id));
     dispatch(deleteAllCasts());
   } catch (error) {
