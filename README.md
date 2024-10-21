@@ -1,2 +1,2 @@
 # HASH
-A Cloud based video streaming Service
+A cloud-based medical video assistant with an AI chatbot.
