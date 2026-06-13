@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+motor
+python-dotenv
+pydantic-settings
+passlib[bcrypt]
+PyJWT
+firebase-admin
+openai
+python-multipart
