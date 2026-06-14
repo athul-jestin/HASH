@@ -1,4 +1,5 @@
 import { createModel } from '@rematch/core'
+import type { RootModel } from './index'
 import type { ModalsState } from './types'
 
 const initialState: ModalsState = {
@@ -10,7 +11,7 @@ const initialState: ModalsState = {
   selectedData: null,
 }
 
-export const modalsModel = createModel<ModalsState>()({
+export const modalsModel = createModel<RootModel>()({
   state: initialState,
   reducers: {
     openMainModal(state: ModalsState, payload?: unknown) {

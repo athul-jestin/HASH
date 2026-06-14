@@ -1,7 +1,7 @@
 .PHONY: build_up down logs ps restart clean
 
 build_up:
-	docker compose up --build -d
+	docker compose up --build
 
 down:
 	docker compose down

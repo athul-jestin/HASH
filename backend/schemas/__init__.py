@@ -1,19 +1,19 @@
-from category import (
+from .category import (
     CategoryCreate, CategoryResponse
 )
 
-from chatbot import (
+from .chatbot import (
     ChatbotRequest, ChatbotResponse
 )
 
-from movie import (
+from .movie import (
     MovieBase, MovieCreate, MovieResponse, MovieReviewCreate, MovieUpdate
 )
 
-from upload import (
+from .upload import (
     UploadResponse
 )
 
-from user import (
+from .user import (
     UserCreate, UserResponse, UserUpdate, UserLogin
 )

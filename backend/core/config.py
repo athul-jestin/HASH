@@ -1,10 +1,12 @@
 from typing import Optional
 
+from pydantic import AliasChoices, Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
     MONGODB_URI: Optional[str] = None
+    MONGO_URI: Optional[str] = None
     MONGO_USER: Optional[str] = None
     MONGO_PASSWORD: Optional[str] = None
     MONGO_HOST: Optional[str] = None
@@ -24,14 +26,16 @@ class Settings(BaseSettings):
     FIREBASE_STORAGE_BUCKET: str
 
     model_config = SettingsConfigDict(
-        env_file="../.env",
+        env_file=(".env", "../.env"),
         env_file_encoding="utf-8",
+        extra="ignore",
     )
 
     @property
     def mongo_connection_string(self) -> str:
-        if self.MONGODB_URI:
-            return self.MONGODB_URI
+        uri = self.MONGODB_URI or self.MONGO_URI
+        if uri:
+            return uri
 
         if self.MONGO_USER and self.MONGO_PASSWORD and self.MONGO_HOST and self.MONGO_DB:
             password = self.MONGO_PASSWORD.replace("\\n", "\n")
@@ -41,7 +45,7 @@ class Settings(BaseSettings):
             return uri
 
         raise ValueError(
-            "MongoDB connection is not configured. Set MONGODB_URI or MONGO_USER/MONGO_PASSWORD/MONGO_HOST/MONGO_DB."
+            "MongoDB connection is not configured. Set MONGODB_URI, MONGO_URI or MONGO_USER/MONGO_PASSWORD/MONGO_HOST/MONGO_DB."
         )
 
 

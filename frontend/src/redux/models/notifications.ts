@@ -1,4 +1,5 @@
 import { createModel } from '@rematch/core'
+import type { RootModel } from './index'
 import type { NotificationsState } from './types'
 
 type Notification = {
@@ -12,7 +13,7 @@ const initialState: NotificationsState = {
   notifications: [],
 }
 
-export const notificationsModel = createModel<NotificationsState>()({
+export const notificationsModel = createModel<RootModel>()({
   state: initialState,
   reducers: {
     addNotification(state: NotificationsState, payload: Notification) {

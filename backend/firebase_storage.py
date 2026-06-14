@@ -1,5 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials, storage
+from typing import Any
 
 from backend.core.config import settings
 
@@ -23,7 +24,7 @@ def _build_firebase_credentials() -> credentials.Certificate:
     )
 
 
-def initialize_firebase() -> storage.Bucket:
+def initialize_firebase() -> Any:
     try:
         firebase_admin.get_app()
     except ValueError:

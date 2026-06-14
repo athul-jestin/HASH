@@ -1,4 +1,5 @@
 import { createModel } from '@rematch/core'
+import type { RootModel } from './index'
 import { Movie } from '../../types'
 import type { MoviesState } from './types'
 
@@ -15,7 +16,7 @@ const initialState: MoviesState = {
   },
 }
 
-export const moviesModel = createModel<MoviesState>()({
+export const moviesModel = createModel<RootModel>()({
   state: initialState,
   reducers: {
     setMovies(state: MoviesState, payload: { movies: Movie[]; page: number; pages: number; totalMovies: number }) {

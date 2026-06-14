@@ -8,3 +8,4 @@ PyJWT
 firebase-admin
 openai
 python-multipart
+email-validator
