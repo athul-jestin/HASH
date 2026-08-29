@@ -2,16 +2,18 @@ from typing import Optional
 
 from pydantic import BaseModel, EmailStr
 
-
-class UserBase(BaseModel):
-    fullName: Optional[str]
-    email: Optional[EmailStr]
-    image: Optional[str]
-    isAdmin: Optional[bool] = False
+from backend.schemas.base import CamelModel
 
 
-class UserCreate(UserBase):
-    fullName: str
+class UserBase(CamelModel):
+    full_name: Optional[str] = None
+    email: Optional[EmailStr] = None
+    image: Optional[str] = None
+    is_admin: bool = False
+
+
+class UserCreate(CamelModel):
+    full_name: str
     email: EmailStr
     password: str
 
@@ -21,15 +23,17 @@ class UserLogin(BaseModel):
     password: str
 
 
-class UserUpdate(BaseModel):
-    fullName: Optional[str]
-    email: Optional[EmailStr]
-    image: Optional[str]
+class UserUpdate(CamelModel):
+    full_name: Optional[str] = None
+    email: Optional[EmailStr] = None
+    image: Optional[str] = None
 
 
 class UserResponse(UserBase):
     id: str
     token: Optional[str] = None
 
-    class Config:
-        orm_mode = True
+
+class PasswordChange(CamelModel):
+    old_password: str
+    new_password: str

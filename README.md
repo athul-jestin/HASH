@@ -1,22 +1,111 @@
 # HASH
-A cloud-based medical video assistant with an AI chatbot.
 
-## Docker Setup
+A cloud-based video streaming learning platform with an AI chatbot.
 
-This repository now includes a Dockerized frontend and Python FastAPI backend.
+- **Backend** — FastAPI (Python 3.12), Supabase Postgres via async SQLAlchemy + Alembic, Supabase Storage for images/video, OpenAI-powered chatbot.
+- **Frontend** — React 18 + TypeScript, Vite, Tailwind CSS, Rematch (Redux) + React Query.
 
-- `make build_up` builds both containers and starts the app
-- `make down` stops the containers
-- `make logs` tails service logs
-- `make restart` restarts services
-- `make clean` removes containers, networks, images, and volumes
+Both apps are Dockerized and run together via `docker-compose.yml`.
 
-### Notes
+## Prerequisites
 
-- Add a root environment file by copying `./.env.example` to `./.env`
-- Configure `MONGO_URI`, `JWT_SECRET`, `OPENAI_API_KEY`, and Firebase values before running
-- If your Mongo password contains special characters like `@`, `#`, or `/`, either:
-  - URL-encode the password inside `MONGO_URI`, or
-  - use the separate variables `MONGO_USER`, `MONGO_PASSWORD`, `MONGO_HOST`, `MONGO_DB`, and optional `MONGO_OPTIONS`
-- The backend is exposed at `http://localhost:5000`
-- The frontend is served from `http://localhost:3000`
+- Docker + Docker Compose (for the containerized path), or Python 3.12 and Node.js (for local dev)
+- A [Supabase](https://supabase.com) project (see below)
+- An OpenAI API key
+
+## 1. Set up Supabase
+
+1. Create a project at [supabase.com](https://supabase.com) and set a database password.
+2. **Database → Project Settings → Database**: copy the **Session pooler** connection string (not the Transaction pooler — the backend uses `asyncpg`, which needs prepared-statement support the transaction pooler doesn't provide). Change its scheme to `postgresql+asyncpg://` and substitute your password.
+3. **Project Settings → API**: copy the `Project URL` and the `service_role` key (not `anon`).
+4. **Storage**: create two buckets — `images` (**public**) and `videos` (**private**).
+
+No manual table or RLS setup is needed — the schema is entirely Alembic-managed, and the backend connects with the service-role key directly.
+
+## 2. Configure environment variables
+
+Copy the example env file at the repo root (not inside `backend/` or `frontend/`):
+
+```
+cp .env.example .env
+```
+
+Fill in:
+
+| Variable | Description |
+|---|---|
+| `DATABASE_URL` | Supabase Postgres connection string, `postgresql+asyncpg://...`, via the Session pooler |
+| `SUPABASE_URL` | Project URL from Project Settings → API |
+| `SUPABASE_SERVICE_ROLE_KEY` | Service role key from Project Settings → API |
+| `SUPABASE_BUCKET_IMAGES` | Storage bucket for images (default `images`) |
+| `SUPABASE_BUCKET_VIDEOS` | Storage bucket for videos (default `videos`) |
+| `SUPABASE_SIGNED_URL_EXPIRY_SECONDS` | TTL for signed video URLs (default `3600`) |
+| `JWT_SECRET` | Any random secret string, e.g. `openssl rand -hex 32` |
+| `OPENAI_API_KEY` | OpenAI API key for the chatbot |
+| `VITE_API_URL` | Frontend's API base URL, default `http://localhost:5000/api` |
+
+## 3. Run with Docker
+
+```
+make build_up   # build + start both containers (backend :5000, frontend :3000)
+make down       # stop containers
+make logs       # tail logs
+make restart    # docker compose down && up -d
+make clean      # remove containers, networks, images, volumes
+```
+
+On first run, apply migrations before using the app (see below).
+
+## 4. Database migrations
+
+Run from the repo root (not inside `backend/`):
+
+```
+alembic -c backend/alembic.ini upgrade head
+```
+
+After changing a model, generate a new migration and review it before applying:
+
+```
+alembic -c backend/alembic.ini revision --autogenerate -m "..."
+```
+
+## 5. Local development (without Docker)
+
+**Backend** (from repo root):
+
+```
+pip install -r backend/requirements.txt
+alembic -c backend/alembic.ini upgrade head
+uvicorn backend.main:app --reload --port 5000
+```
+
+**Frontend** (from `frontend/`):
+
+```
+npm install
+npm run dev          # vite dev server on :3000
+npm run build         # tsc && vite build
+npm run lint          # eslint . --ext ts,tsx
+npm run type-check    # tsc --noEmit
+```
+
+There is no configured test suite for either app yet.
+
+## Project structure
+
+```
+backend/
+  api/endpoints/   # categories, chatbot, movies, upload, users
+  core/            # settings, database engine, security
+  models/          # SQLAlchemy models (User, Category, Movie, MovieCast, Review, Favorite)
+  schemas/         # Pydantic v2 schemas (camelCase JSON contract via CamelModel)
+  alembic/         # migrations
+  supabase_storage.py
+
+frontend/
+  src/
+    pages/, components/, contexts/, services/, redux/, hooks/
+```
+
+See `CLAUDE.md` for a deeper architectural walkthrough.

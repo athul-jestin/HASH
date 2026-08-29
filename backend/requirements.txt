@@ -1,11 +1,13 @@
 fastapi
 uvicorn[standard]
-motor
+sqlalchemy[asyncio]
+asyncpg
+alembic
 python-dotenv
 pydantic-settings
 passlib[bcrypt]
 PyJWT
-firebase-admin
+httpx
 openai
 python-multipart
 email-validator

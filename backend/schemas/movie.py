@@ -1,9 +1,19 @@
+from datetime import datetime
 from typing import List, Optional
+from uuid import UUID
 
 from pydantic import BaseModel, Field
 
+from backend.schemas.base import CamelModel
 
-class MovieCast(BaseModel):
+
+class MovieCastInput(BaseModel):
+    name: str
+    image: str
+
+
+class MovieCastResponse(CamelModel):
+    id: str
     name: str
     image: str
 
@@ -13,44 +23,61 @@ class MovieReviewCreate(BaseModel):
     comment: str
 
 
-class MovieBase(BaseModel):
+class MovieReviewResponse(CamelModel):
+    id: str
+    user_id: str
+    user_name: str
+    user_image: Optional[str] = None
+    rating: int
+    comment: str
+    created_at: datetime
+
+
+class MovieBase(CamelModel):
     name: str
     desc: str
-    titleImage: str
+    title_image: str
     image: str
-    category: str
+    category_id: UUID
     language: str
     year: int
     time: int
     video: Optional[str] = None
-    casts: List[MovieCast] = []
+    casts: List[MovieCastInput] = []
 
 
 class MovieCreate(MovieBase):
     pass
 
 
-class MovieUpdate(BaseModel):
-    name: Optional[str]
-    desc: Optional[str]
-    titleImage: Optional[str]
-    image: Optional[str]
-    category: Optional[str]
-    language: Optional[str]
-    year: Optional[int]
-    time: Optional[int]
-    video: Optional[str]
-    casts: Optional[List[MovieCast]]
-    rate: Optional[float]
-    numberOfReviews: Optional[int]
+class MovieUpdate(CamelModel):
+    name: Optional[str] = None
+    desc: Optional[str] = None
+    title_image: Optional[str] = None
+    image: Optional[str] = None
+    category_id: Optional[UUID] = None
+    language: Optional[str] = None
+    year: Optional[int] = None
+    time: Optional[int] = None
+    video: Optional[str] = None
+    casts: Optional[List[MovieCastInput]] = None
 
 
-class MovieResponse(MovieBase):
+class MovieResponse(CamelModel):
     id: str
-    userId: str
+    user_id: Optional[str] = None
+    name: str
+    desc: str
+    title_image: str
+    image: str
+    category: str
+    language: str
+    year: int
+    time: int
+    video: Optional[str] = None
     rate: float
-    numberOfReviews: int
-    reviews: List[dict] = []
-
-    class Config:
-        orm_mode = True
+    number_of_reviews: int
+    reviews: List[MovieReviewResponse] = []
+    casts: List[MovieCastResponse] = []
+    created_at: datetime
+    updated_at: datetime

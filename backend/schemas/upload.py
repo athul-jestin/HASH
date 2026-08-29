@@ -1,8 +1,6 @@
-from pydantic import BaseModel
+from backend.schemas.base import CamelModel
 
 
-class UploadResponse(BaseModel):
+class UploadResponse(CamelModel):
+    path: str
     url: str
-
-    class Config:
-        orm_mode = True
