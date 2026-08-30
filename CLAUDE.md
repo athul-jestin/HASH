@@ -21,11 +21,13 @@ make logs       # tail logs
 make restart    # docker compose down && up -d
 make clean      # remove containers, networks, images, volumes
 ```
+The backend container's `CMD` is `backend/prestart.sh`, not uvicorn directly — it runs `alembic upgrade head`, then `backend/scripts/seed_admin.py` (idempotent, creates an admin user from `ADMIN_FULL_NAME`/`ADMIN_EMAIL`/`ADMIN_PASSWORD` if set and not already present), then execs uvicorn. So `make build_up` alone is a complete first-run setup — no manual migration or admin bootstrapping step outside Docker.
 
 ### Backend (from repo root)
 ```
 pip install -r backend/requirements.txt
 alembic -c backend/alembic.ini upgrade head     # apply DB migrations, run from repo root
+python -m backend.scripts.seed_admin            # optional — prestart.sh isn't invoked outside Docker
 uvicorn backend.main:app --reload --port 5000   # run from repo root, not backend/
 ```
 New migration after changing a model: `alembic -c backend/alembic.ini revision --autogenerate -m "..."`, then review the generated file before applying it.
@@ -43,7 +45,7 @@ npm run type-check    # tsc --noEmit
 There is no test suite configured for the frontend either.
 
 ### Environment
-Copy `.env.example` to `.env` at the repo root (not inside `backend/` or `frontend/`) before running anything. Required: `DATABASE_URL` (Supabase Postgres, `postgresql+asyncpg://...`, via the Session pooler — not the Transaction pooler, which breaks asyncpg's prepared statements), `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `JWT_SECRET`, `OPENAI_API_KEY`. See `backend/core/config.py` for the full settings model.
+Copy `.env.example` to `.env` at the repo root (not inside `backend/` or `frontend/`) before running anything. `.env` is gitignored — never commit it. Required: `DATABASE_URL` (Supabase Postgres, `postgresql+asyncpg://...`, via the Session pooler — not the Transaction pooler, which breaks asyncpg's prepared statements), `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `JWT_SECRET`, `OPENAI_API_KEY`. Optional: `ADMIN_FULL_NAME`/`ADMIN_EMAIL`/`ADMIN_PASSWORD` (seeds an admin user on startup, see above). See `backend/core/config.py` for the full settings model.
 
 Supabase setup (one-time, in the dashboard): create a project, create two Storage buckets — `images` (public) and `videos` (private) — and copy the Session pooler connection string, service role key, and project URL into `.env`. Schema is entirely Alembic-managed; no manual table or RLS setup is needed since the backend talks to Postgres directly with the service-role connection.
 
@@ -57,6 +59,7 @@ Supabase setup (one-time, in the dashboard): create a project, create two Storag
 - **Storage** (`backend/supabase_storage.py`): plain `httpx` calls to the Supabase Storage REST API, authorized with the service-role key. Two buckets: `images` (public — `get_public_url()` is pure string construction) and `videos` (private — `create_signed_url()` makes a signing call, expiry from `SUPABASE_SIGNED_URL_EXPIRY_SECONDS`). **Models/DB store the storage *path*, never a URL** — signed URLs expire, so they're resolved at read time, not persisted. Movie video URLs are only signed on `GET /movies/{id}`; list endpoints (`/movies`, `/movies/rated/top`, `/movies/random/all`, `/users/favorites`) return `video: null` to avoid N signing calls per page.
 - **Upload**: split into `POST /upload/image` and `POST /upload/video` (`backend/api/endpoints/upload.py`) rather than one generic endpoint, since each targets a different bucket with its own content-type guard. Response is `{path, url}` — `path` is what gets persisted into movie/user/cast fields; `url` is a transient preview link only (expires for video).
 - **Chatbot** (`backend/api/endpoints/chatbot.py`): thin wrapper around the OpenAI chat completions API (`gpt-3.5-turbo`), no DB involvement — untouched by the Supabase rework.
+- **Startup** (`backend/prestart.sh`, `backend/scripts/seed_admin.py`): the Docker container's entrypoint — migrate, seed admin, serve. `seed_admin.py` is safe to run repeatedly (checks for an existing user by `ADMIN_EMAIL` first) and is also invokable standalone via `python -m backend.scripts.seed_admin`.
 
 ## Frontend architecture
 

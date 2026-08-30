@@ -43,6 +43,7 @@ Fill in:
 | `JWT_SECRET` | Any random secret string, e.g. `openssl rand -hex 32` |
 | `OPENAI_API_KEY` | OpenAI API key for the chatbot |
 | `VITE_API_URL` | Frontend's API base URL, default `http://localhost:5000/api` |
+| `ADMIN_FULL_NAME`, `ADMIN_EMAIL`, `ADMIN_PASSWORD` | Optional — if all three are set, an admin user is seeded automatically on first startup (see below). Leave blank to skip. |
 
 ## 3. Run with Docker
 
@@ -54,30 +55,29 @@ make restart    # docker compose down && up -d
 make clean      # remove containers, networks, images, volumes
 ```
 
-On first run, apply migrations before using the app (see below).
+That's it — `make build_up` is the only command needed. On startup, the backend container runs `backend/prestart.sh`, which:
 
-## 4. Database migrations
+1. Applies all pending Alembic migrations (`alembic upgrade head`).
+2. Seeds the admin user from `ADMIN_FULL_NAME`/`ADMIN_EMAIL`/`ADMIN_PASSWORD`, if set and not already present (idempotent — safe to restart the stack repeatedly).
+3. Starts uvicorn.
 
-Run from the repo root (not inside `backend/`):
+So a new dev can clone the repo, fill in `.env`, and run `make build_up` — no manual migration step or admin bootstrapping required.
+
+## 4. Local development (without Docker)
+
+**Backend** (from repo root):
 
 ```
-alembic -c backend/alembic.ini upgrade head
+pip install -r backend/requirements.txt
+alembic -c backend/alembic.ini upgrade head   # prestart.sh isn't used outside Docker — run this manually
+python -m backend.scripts.seed_admin          # optional, seeds the admin user from .env
+uvicorn backend.main:app --reload --port 5000
 ```
 
 After changing a model, generate a new migration and review it before applying:
 
 ```
 alembic -c backend/alembic.ini revision --autogenerate -m "..."
-```
-
-## 5. Local development (without Docker)
-
-**Backend** (from repo root):
-
-```
-pip install -r backend/requirements.txt
-alembic -c backend/alembic.ini upgrade head
-uvicorn backend.main:app --reload --port 5000
 ```
 
 **Frontend** (from `frontend/`):
