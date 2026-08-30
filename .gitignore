@@ -41,6 +41,9 @@ venv/
 .vscode/
 .idea/
 
+# Environment variables (contains secrets — use .env.example as the template)
+.env
+
 # MacOS
 .AppleDouble
 .LSOverride
