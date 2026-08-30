@@ -1,39 +1,23 @@
 import api from './api'
-import { Movie, PaginatedResponse, ApiResponse } from '../types'
+import { Movie, MovieCreateInput, MovieUpdateInput, MoviesListResponse, MoviesQueryParams } from '../types'
 
 export const moviesService = {
-  getMovies: (params?: {
-    category?: string
-    time?: number
-    language?: string
-    rate?: number
-    year?: number
-    search?: string
-    pageNumber?: number
-  }) =>
-    api.get<PaginatedResponse<Movie>>('/movies', { params }),
+  getMovies: (params?: MoviesQueryParams) => api.get<MoviesListResponse>('/movies', { params }),
 
-  getMovieById: (id: string) =>
-    api.get<ApiResponse<Movie>>(`/movies/${id}`),
+  getMovieById: (id: string) => api.get<Movie>(`/movies/${id}`),
 
-  getTopRatedMovies: () =>
-    api.get<ApiResponse<Movie[]>>('/movies/rated/top'),
+  getTopRatedMovies: () => api.get<Movie[]>('/movies/rated/top'),
 
-  getRandomMovies: () =>
-    api.get<ApiResponse<Movie[]>>('/movies/random/all'),
+  getRandomMovies: () => api.get<Movie[]>('/movies/random/all'),
 
   createMovieReview: (movieId: string, data: { rating: number; comment: string }) =>
-    api.post(`/movies/${movieId}/reviews`, data),
+    api.post<{ message: string }>(`/movies/${movieId}/reviews`, data),
 
-  createMovie: (data: Omit<Movie, '_id' | 'id' | 'userId' | 'reviews' | 'createdAt' | 'updatedAt'>) =>
-    api.post<ApiResponse<Movie>>('/movies', data),
+  createMovie: (data: MovieCreateInput) => api.post<Movie>('/movies', data),
 
-  updateMovie: (id: string, data: Partial<Movie>) =>
-    api.put<ApiResponse<Movie>>(`/movies/${id}`, data),
+  updateMovie: (id: string, data: MovieUpdateInput) => api.put<Movie>(`/movies/${id}`, data),
 
-  deleteMovie: (id: string) =>
-    api.delete(`/movies/${id}`),
+  deleteMovie: (id: string) => api.delete<{ message: string }>(`/movies/${id}`),
 
-  deleteAllMovies: () =>
-    api.delete('/movies'),
+  deleteAllMovies: () => api.delete<{ message: string }>('/movies'),
 }

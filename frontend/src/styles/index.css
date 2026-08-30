@@ -3,51 +3,96 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #6366f1;
-  --color-secondary: #1e293b;
-  --color-accent: #f59e0b;
-  --color-background: #ffffff;
-  --color-foreground: #1e293b;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-primary: #818cf8;
-    --color-secondary: #f1f5f9;
-    --color-accent: #fbbf24;
-    --color-background: #1e293b;
-    --color-foreground: #f1f5f9;
-  }
-}
-
-* {
-  @apply transition-colors duration-200;
+  --color-bg: #0a0a0d;
+  --color-surface: #16161d;
+  --color-surface-hover: #202029;
+  --color-border: #27272f;
+  --color-text: #f5f5f7;
+  --color-text-muted: #9a9aa5;
+  --color-accent: #e11d48;
+  --color-accent-hover: #be123c;
+  --color-gold: #eab308;
 }
 
 body {
-  @apply bg-background text-foreground;
+  @apply bg-bg text-text font-sans antialiased;
 }
 
-a {
-  @apply text-primary hover:text-primary/80;
+h1,
+h2,
+h3,
+h4 {
+  @apply font-display tracking-wide;
 }
 
-button {
-  @apply rounded-lg px-4 py-2 font-medium transition-all duration-200;
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-hover);
+  border-radius: 999px;
+}
+
+/* horizontal movie rows: scrollable, no visible scrollbar */
+.row-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.row-scroll::-webkit-scrollbar {
+  display: none;
 }
 
 .btn-primary {
-  @apply bg-primary text-white hover:bg-primary/80;
+  @apply inline-flex items-center justify-center gap-2 rounded-md bg-accent px-5 py-2.5 font-semibold text-white transition-colors hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50;
 }
 
 .btn-secondary {
-  @apply bg-secondary text-white hover:bg-secondary/80;
+  @apply inline-flex items-center justify-center gap-2 rounded-md border border-border bg-surface-hover px-5 py-2.5 font-semibold text-text transition-colors hover:bg-surface disabled:cursor-not-allowed disabled:opacity-50;
 }
 
 .card {
-  @apply rounded-lg bg-white p-4 shadow-md dark:bg-slate-800;
+  @apply rounded-lg border border-border bg-surface;
 }
 
 .input-field {
-  @apply w-full rounded-lg border border-gray-300 px-3 py-2 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary;
+  @apply w-full rounded-md border border-border bg-surface px-3.5 py-2.5 text-text placeholder:text-text-muted focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent;
+}
+
+.field-label {
+  @apply mb-1.5 block text-sm font-medium text-text-muted;
+}
+
+.field-error {
+  @apply mt-1 text-sm text-accent;
+}
+
+.markdown-content :where(p, ul, ol) {
+  @apply mb-2 last:mb-0;
+}
+
+.markdown-content :where(ul, ol) {
+  @apply pl-5;
+}
+
+.markdown-content ul {
+  @apply list-disc;
+}
+
+.markdown-content ol {
+  @apply list-decimal;
+}
+
+.markdown-content code {
+  @apply rounded bg-surface-hover px-1 py-0.5 text-xs;
+}
+
+.markdown-content a {
+  @apply text-accent underline;
 }

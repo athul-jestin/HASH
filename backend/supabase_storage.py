@@ -51,7 +51,32 @@ async def create_signed_url(bucket: str, path: str, expires_in: int | None = Non
     return f"{settings.SUPABASE_URL}/storage/v1{signed_path}"
 
 
-async def delete_object(bucket: str, path: str) -> None:
+async def delete_objects(bucket: str, paths: list[str]) -> None:
+    if not paths:
+        return
     client = _get_client()
-    response = await client.request("DELETE", f"/object/{bucket}", json={"prefixes": [path]})
+    response = await client.request("DELETE", f"/object/{bucket}", json={"prefixes": paths})
     response.raise_for_status()
+
+
+async def delete_object(bucket: str, path: str) -> None:
+    await delete_objects(bucket, [path])
+
+
+async def list_all_objects(bucket: str) -> list[str]:
+    client = _get_client()
+    names: list[str] = []
+    offset = 0
+    limit = 1000
+    while True:
+        response = await client.post(
+            f"/object/list/{bucket}",
+            json={"prefix": "", "limit": limit, "offset": offset},
+        )
+        response.raise_for_status()
+        page = response.json()
+        names.extend(entry["name"] for entry in page)
+        if len(page) < limit:
+            break
+        offset += limit
+    return names

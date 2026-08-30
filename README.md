@@ -48,11 +48,12 @@ Fill in:
 ## 3. Run with Docker
 
 ```
-make build_up   # build + start both containers (backend :5000, frontend :3000)
-make down       # stop containers
-make logs       # tail logs
-make restart    # docker compose down && up -d
-make clean      # remove containers, networks, images, volumes
+make build_up    # build + start both containers (backend :5000, frontend :3000)
+make down        # stop containers
+make logs        # tail logs
+make restart     # docker compose down && up -d
+make clean       # remove containers, networks, images, volumes
+make reset-data  # DESTRUCTIVE: wipe all DB rows and all Supabase storage files
 ```
 
 That's it — `make build_up` is the only command needed. On startup, the backend container runs `backend/prestart.sh`, which:
@@ -62,6 +63,8 @@ That's it — `make build_up` is the only command needed. On startup, the backen
 3. Starts uvicorn.
 
 So a new dev can clone the repo, fill in `.env`, and run `make build_up` — no manual migration step or admin bootstrapping required.
+
+`make reset-data` truncates every table and empties both Supabase storage buckets — useful for getting back to a clean slate during development. It's irreversible and asks for interactive `yes` confirmation before doing anything; the schema itself is untouched (no need to re-run migrations after), but you will need to reseed the admin user afterward (`make restart` does this automatically since the seed step runs on every container start).
 
 ## 4. Local development (without Docker)
 

@@ -1,4 +1,4 @@
-.PHONY: build_up down logs ps restart clean
+.PHONY: build_up down logs ps restart clean reset-data
 
 build_up:
 	docker compose up --build
@@ -17,3 +17,6 @@ restart:
 
 clean:
 	docker compose down --rmi all --volumes --remove-orphans
+
+reset-data:
+	docker compose run --rm --build backend python -m backend.scripts.reset_data

@@ -1,16 +1,12 @@
 import api from './api'
-import { Category, ApiResponse } from '../types'
+import { Category } from '../types'
 
 export const categoriesService = {
-  getCategories: () =>
-    api.get<ApiResponse<Category[]>>('/categories'),
+  getCategories: () => api.get<Category[]>('/categories'),
 
-  createCategory: (data: { title: string }) =>
-    api.post<ApiResponse<Category>>('/categories', data),
+  createCategory: (data: { title: string }) => api.post<Category>('/categories', data),
 
-  updateCategory: (id: string, data: { title: string }) =>
-    api.put<ApiResponse<Category>>(`/categories/${id}`, data),
+  updateCategory: (id: string, data: { title: string }) => api.put<Category>(`/categories/${id}`, data),
 
-  deleteCategory: (id: string) =>
-    api.delete(`/categories/${id}`),
+  deleteCategory: (id: string) => api.delete<{ message: string }>(`/categories/${id}`),
 }

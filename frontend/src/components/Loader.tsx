@@ -13,11 +13,11 @@ export const Loader: React.FC<LoaderProps> = ({ size = 'medium', fullPage = fals
   }
 
   const loader = (
-    <div className={`animate-spin rounded-full border-4 border-gray-200 border-t-indigo-600 ${sizeClasses[size]}`} />
+    <div className={`animate-spin rounded-full border-4 border-surface-hover border-t-accent ${sizeClasses[size]}`} />
   )
 
   if (fullPage) {
-    return <div className="flex items-center justify-center min-h-screen bg-gray-50">{loader}</div>
+    return <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">{loader}</div>
   }
 
   return <div className="flex items-center justify-center">{loader}</div>

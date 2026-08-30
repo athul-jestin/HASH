@@ -1,34 +1,26 @@
 import api from './api'
-import { User, ApiResponse } from '../types'
+import { User, Movie, LoginInput, RegisterInput } from '../types'
 
 export const userService = {
-  register: (data: { fullName: string; email: string; password: string; image?: string }) =>
-    api.post<ApiResponse<User>>('/users', data),
+  register: (data: RegisterInput) => api.post<User>('/users', data),
 
-  login: (data: { email: string; password: string }) =>
-    api.post<ApiResponse<User>>('/users/login', data),
+  login: (data: LoginInput) => api.post<User>('/users/login', data),
 
   updateProfile: (data: { fullName?: string; email?: string; image?: string }) =>
-    api.put<ApiResponse<User>>('/users', data),
+    api.put<User>('/users', data),
 
-  deleteProfile: () =>
-    api.delete('/users'),
+  deleteProfile: () => api.delete<{ message: string }>('/users'),
 
   changePassword: (data: { oldPassword: string; newPassword: string }) =>
-    api.put('/users/password', data),
+    api.put<{ message: string }>('/users/password', data),
 
-  getFavorites: () =>
-    api.get('/users/favorites'),
+  getFavorites: () => api.get<Movie[]>('/users/favorites'),
 
-  addFavorite: (movieId: string) =>
-    api.post('/users/favorites', { movieId }),
+  addFavorite: (movieId: string) => api.post<{ message: string }>('/users/favorites', { movieId }),
 
-  removeFavorites: () =>
-    api.delete('/users/favorites'),
+  clearFavorites: () => api.delete<{ message: string }>('/users/favorites'),
 
-  getAllUsers: () =>
-    api.get<ApiResponse<User[]>>('/users'),
+  getAllUsers: () => api.get<User[]>('/users'),
 
-  deleteUser: (userId: string) =>
-    api.delete(`/users/${userId}`),
+  deleteUser: (userId: string) => api.delete<{ message: string }>(`/users/${userId}`),
 }

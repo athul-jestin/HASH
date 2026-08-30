@@ -63,13 +63,13 @@ export const moviesModel = createModel<RootModel>()({
     updateMovie(state: MoviesState, payload: Movie) {
       return {
         ...state,
-        movies: state.movies.map((m) => (m._id === payload._id ? payload : m)),
+        movies: state.movies.map((m) => (m.id === payload.id ? payload : m)),
       }
     },
     deleteMovie(state: MoviesState, payload: string) {
       return {
         ...state,
-        movies: state.movies.filter((m) => m._id !== payload),
+        movies: state.movies.filter((m) => m.id !== payload),
       }
     },
     clearMovies() {

@@ -4,14 +4,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
+        bg: 'var(--color-bg)',
+        surface: 'var(--color-surface)',
+        'surface-hover': 'var(--color-surface-hover)',
+        border: 'var(--color-border)',
+        text: 'var(--color-text)',
+        'text-muted': 'var(--color-text-muted)',
         accent: 'var(--color-accent)',
-        background: 'var(--color-background)',
-        foreground: 'var(--color-foreground)',
+        'accent-hover': 'var(--color-accent-hover)',
+        gold: 'var(--color-gold)',
       },
       fontFamily: {
-        sans: ['Work Sans', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['"Bebas Neue"', 'sans-serif'],
+      },
+      backgroundImage: {
+        'fade-top': 'linear-gradient(to top, var(--color-bg) 0%, transparent 100%)',
+        'fade-bottom': 'linear-gradient(to bottom, var(--color-bg) 0%, transparent 100%)',
       },
     },
   },

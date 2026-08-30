@@ -1,6 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ProtectedRoute } from '@components/ProtectedRoute'
+import { MainLayout } from '@layouts/MainLayout'
+import { Loader } from '@components/Loader'
+import { ROLES } from '@utils/constants'
 
 // Lazy-load pages for code splitting
 const Home = React.lazy(() => import('@pages/Home'))
@@ -15,30 +18,32 @@ const NotFound = React.lazy(() => import('@pages/NotFound'))
 const App: React.FC = () => {
   return (
     <Router>
-      <React.Suspense fallback={<div className="flex items-center justify-center min-h-screen">Loading...</div>}>
+      <React.Suspense fallback={<Loader fullPage />}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/movies/:id" element={<SingleMovie />} />
-          <Route
-            path="/dashboard/*"
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/chatbot"
-            element={
-              <ProtectedRoute>
-                <Chatbot />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="*" element={<NotFound />} />
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/movies/:id" element={<SingleMovie />} />
+            <Route
+              path="/dashboard/*"
+              element={
+                <ProtectedRoute requiredRoles={[ROLES.OWNER]}>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/chatbot"
+              element={
+                <ProtectedRoute>
+                  <Chatbot />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
+          </Route>
         </Routes>
       </React.Suspense>
     </Router>

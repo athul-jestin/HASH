@@ -35,15 +35,23 @@ api.interceptors.request.use(
 // Response interceptor for global error handling
 api.interceptors.response.use(
   (response) => response,
-  (error: AxiosError) => {
-    if (error.response?.status === 401) {
+  (error: AxiosError<{ detail?: string }>) => {
+    const status = error.response?.status
+    // Only treat 401 as "session expired" when the failing request actually carried a
+    // token — a bare login/register attempt returning 401 is just "wrong credentials"
+    // and should be handled by the calling page, not force a logout + redirect.
+    const hadAuthHeader = Boolean(error.config?.headers?.Authorization)
+
+    if (status === 401 && hadAuthHeader) {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
-      window.location.href = '/login'
       toast.error('Session expired. Please login again.')
-    } else if (error.response?.status === 403) {
+      window.location.href = '/login'
+    } else if (status === 403) {
       toast.error('Access denied.')
-    } else if (typeof error.response?.status === 'number' && error.response.status >= 500) {
+    } else if (status === 400) {
+      toast.error(error.response?.data?.detail || 'Something went wrong.')
+    } else if (typeof status === 'number' && status >= 500) {
       toast.error('Server error. Please try again later.')
     } else if (error.message === 'Network Error') {
       toast.error('Network error. Please check your connection.')

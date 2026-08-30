@@ -20,8 +20,11 @@ make down       # stop containers
 make logs       # tail logs
 make restart    # docker compose down && up -d
 make clean      # remove containers, networks, images, volumes
+make reset-data # DESTRUCTIVE: truncates every table + empties both Supabase buckets
 ```
 The backend container's `CMD` is `backend/prestart.sh`, not uvicorn directly — it runs `alembic upgrade head`, then `backend/scripts/seed_admin.py` (idempotent, creates an admin user from `ADMIN_FULL_NAME`/`ADMIN_EMAIL`/`ADMIN_PASSWORD` if set and not already present), then execs uvicorn. So `make build_up` alone is a complete first-run setup — no manual migration or admin bootstrapping step outside Docker.
+
+`make reset-data` runs `backend/scripts/reset_data.py` (via `docker compose run`) to wipe all data for a clean local dev slate — `TRUNCATE ... CASCADE` on every model table plus a full delete of every object in the `images`/`videos` buckets. It prompts for interactive `yes` confirmation first; don't wire this into any other target or CI path.
 
 ### Backend (from repo root)
 ```

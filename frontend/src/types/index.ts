@@ -3,7 +3,7 @@ export interface User {
   id: string
   fullName: string
   email: string
-  image?: string
+  image?: string | null
   isAdmin: boolean
   token?: string
 }
@@ -14,27 +14,42 @@ export interface AuthState {
   token: string | null
 }
 
+export interface LoginInput {
+  email: string
+  password: string
+}
+
+export interface RegisterInput {
+  fullName: string
+  email: string
+  password: string
+}
+
 // Movie types
 export interface MovieCast {
+  id: string
+  name: string
+  image: string
+}
+
+export interface MovieCastInput {
   name: string
   image: string
 }
 
 export interface MovieReview {
-  _id?: string
-  id?: string
+  id: string
+  userId: string
   userName: string
-  userImage?: string
+  userImage?: string | null
   rating: number
   comment: string
-  userId: string
-  createdAt?: string
+  createdAt: string
 }
 
 export interface Movie {
-  _id?: string
-  id?: string
-  userId: string
+  id: string
+  userId?: string | null
   name: string
   desc: string
   titleImage: string
@@ -43,43 +58,63 @@ export interface Movie {
   language: string
   year: number
   time: number
-  video?: string
+  video?: string | null
   rate: number
   numberOfReviews: number
   reviews: MovieReview[]
   casts: MovieCast[]
-  createdAt?: string
-  updatedAt?: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface MovieCreateInput {
+  name: string
+  desc: string
+  titleImage: string
+  image: string
+  categoryId: string
+  language: string
+  year: number
+  time: number
+  video?: string | null
+  casts: MovieCastInput[]
+}
+
+export type MovieUpdateInput = Partial<MovieCreateInput>
+
+export interface MoviesListResponse {
+  movies: Movie[]
+  page: number
+  pages: number
+  totalMovies: number
+}
+
+export interface MoviesQueryParams {
+  category?: string
+  time?: number
+  language?: string
+  rate?: number
+  year?: number
+  search?: string
+  pageNumber?: number
 }
 
 // Category types
 export interface Category {
-  _id?: string
-  id?: string
+  id: string
   title: string
-  createdAt?: string
-  updatedAt?: string
 }
 
-// API Response types
-export interface ApiResponse<T> {
-  data: T
-  message?: string
-  status: number
-}
-
-export interface PaginatedResponse<T> {
-  movies?: T[]
-  page: number
-  pages: number
-  totalMovies: number
+// Upload
+export interface UploadResponse {
+  path: string
+  url: string
 }
 
 // Chatbot types
 export interface ChatMessage {
   role: 'user' | 'assistant'
   content: string
-  timestamp?: Date
 }
 
 export interface ChatbotResponse {
